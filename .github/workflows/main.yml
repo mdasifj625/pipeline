@@ -38,14 +38,12 @@ jobs:
               run: |
                   ssh -i ~/.ssh/id_rsa $EC2_USER@$EC2_HOST << EOF
                   if [ ! -d "pipeline" ]; then
-                  git clone https://github.com/mdasifj625/pipeline.git
+                  git clone ${{github.event.repository.clone_url}}
                   cd pipeline
                   else
                   cd pipeline
                   git pull origin main
                   fi
-                  git clone ${{github.event.repository.clone_url}}
-                  cd ./pipeline
                   npm run manage_node
                   npm run manage_pm2
                   EOF
