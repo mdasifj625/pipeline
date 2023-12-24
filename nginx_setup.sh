@@ -36,13 +36,13 @@ sudo touch $CONFIG_FILE
 # in case of https config
 
 # make sure ssl folder is available
-mkdir /etc/nginx/ssl
+sudo mkdir /etc/nginx/ssl
 
 # Read the content of cert.pem and save it to $APP_HOST.pem
-cat cert.pem | sudo tee /etc/nginx/ssl/$APP_HOST.pem >/dev/null
+sudo cat cert.pem | sudo tee /etc/nginx/ssl/$APP_HOST.pem >/dev/null
 
 # Read the content of cert.key and save it to $APP_HOST.key
-cat cert.key | sudo tee /etc/nginx/ssl/$APP_HOST.key >/dev/null
+sudo cat cert.key | sudo tee /etc/nginx/ssl/$APP_HOST.key >/dev/null
 
 # set the appropriate permission to the certificate
 sudo chmod 600 /etc/nginx/ssl/$APP_HOST.pem
