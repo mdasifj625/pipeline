@@ -32,9 +32,11 @@ jobs:
                   ssh-keyscan -H "$EC2_HOST" > ~/.ssh/known_hosts
                   echo "$EC2_SSH_KEY"
                   echo $EC2_SSH_KEY
+                  echo "$EC2_HOST"
+                  echo ${{secrets.EC2_HOST}}
               env:
                   EC2_SSH_KEY: ${{secrets.EC2_SSH_KEY}}
-                  EC2_HOST: ${{secrets.EC2_SSH_HOST}}
+                  EC2_HOST: ${{secrets.EC2_HOST}}
 
             # - name: SSH into EC2
             #   run: |
