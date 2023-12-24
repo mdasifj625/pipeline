@@ -44,9 +44,16 @@ jobs:
                       cd pipeline
                       git pull origin main
                   fi
-                  chmod +x ./.github/manage_node.sh  # Ensure the script has execution permissions
-                  ./.github/manage_node.sh   # Execute the shell script
+
+                  # Ensure the script has execution permissions and execute it
+                  chmod +x ./.github/manage_node.sh
+                  ./.github/manage_node.sh
+
+                  # Source nvm and ensure npm is available
+                  export NVM_DIR="$HOME/.nvm"
+                  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
                   npm run manage_pm2
+
                   EOF
               env:
                   EC2_HOST: ${{secrets.EC2_HOST}}
