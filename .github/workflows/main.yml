@@ -36,13 +36,7 @@ jobs:
 
             - name: SSH into EC2
               run: |
-                  ssh -i ~/.ssh/id_rsa $EC2_USER@$EC2_HOST << EOF
-              env:
-                  EC2_HOST: ${{secrets.EC2_HOST}}
-                  EC2_USER: ${{secrets.EC2_USER}}
-
-            - name: Take pull and run shell commad to install nodejs and start server
-              run: |
+                  ssh -i ~/.ssh/id_rsa $EC2_USER@$EC2_HOST << 'EOF'
                   if [ ! -d "pipeline" ]; then
                       git clone ${{github.event.repository.clone_url}}
                       cd pipeline
@@ -52,5 +46,8 @@ jobs:
                   fi
                   chmod +x ./.github/manage_node.sh  # Ensure the script has execution permissions
                   ./.github/manage_node.sh   # Execute the shell script
-                  EOF
                   npm run manage_pm2
+                  EOF
+              env:
+                  EC2_HOST: ${{secrets.EC2_HOST}}
+                  EC2_USER: ${{secrets.EC2_USER}}
