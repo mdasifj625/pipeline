@@ -42,6 +42,8 @@ jobs:
                       cd pipeline
                   else
                       cd pipeline
+                      git stash
+                      git stash clear
                       git pull origin main
                   fi
                   echo pwd
