@@ -19,7 +19,8 @@ if ! command -v node &>/dev/null || ! node -v | grep -q "v$NODE_VERSION"; then
     nvm use "$NODE_VERSION"
 fi
 
-npm install -g pm2
+npm i -g pm2
+npm i
 
 if pm2 list | grep -q $APP_NAME; then
     echo "App is running, restarting..."
