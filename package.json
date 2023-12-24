@@ -6,8 +6,6 @@
   "type": "module",
   "scripts": {
     "start": "node index.js",
-    "manage_node":"./manage_node.sh",
-    "manage_node_windows":"bash manage_node.sh",
     "manage_pm2":"./manage_pm2.sh",
     "manage_pm2_windows":"bash manage_pm2.sh"
   },
