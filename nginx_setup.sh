@@ -24,10 +24,10 @@ if [ -f "$CONFIG_FILE" ]; then
 fi
 
 sudo touch $CONFIG_FILE
-if sudo systemctl reload nginx; then
-    echo "Nginx configuration reloaded successfully."
+if sudo systemctl restart nginx; then
+    echo "Nginx service restarted successfully."
 else
-    echo "Failed to reload Nginx. Check the configuration."
+    echo "Failed to restart Nginx. Check the configuration."
     exit 1
 fi
 
