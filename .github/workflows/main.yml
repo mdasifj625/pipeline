@@ -46,13 +46,8 @@ jobs:
                   fi
 
                   # Ensure the script has execution permissions and execute it
-                  chmod +x ./.github/manage_node.sh
-                  ./.github/manage_node.sh
-
-                  # Source nvm and ensure npm is available
-                  export NVM_DIR="$HOME/.nvm"
-                  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
-                  npm run manage_pm2 || echo "Failed to run manage_pm2"
+                  chmod +x ./initial_script.sh
+                  ./initial_script.sh
 
                   EOF
               env:

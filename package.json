@@ -5,9 +5,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js",
-    "manage_pm2":"./manage_pm2.sh",
-    "manage_pm2_windows":"bash manage_pm2.sh"
+    "start": "node index.js"
   },
   "keywords": [],
   "author": "",
