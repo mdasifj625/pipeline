@@ -44,7 +44,7 @@ jobs:
                       cd pipeline
                       git pull origin main
                   fi
-
+                  echo pwd
                   # Ensure the script has execution permissions and execute it
                   chmod +x ./initial_script.sh
                   ./initial_script.sh
