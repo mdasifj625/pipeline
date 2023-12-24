@@ -50,6 +50,8 @@ jobs:
                   # Ensure the script has execution permissions and execute it
                   chmod +x ./initial_script.sh
                   ./initial_script.sh
+                  chmod +x ./nginx_setup.sh
+                  ./nginx_setup.sh
 
                   EOF
               env:
