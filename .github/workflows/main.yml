@@ -29,21 +29,18 @@ jobs:
                   mkdir -p ~/.ssh/
                   echo "$EC2_SSH_KEY" > ~/.ssh/id_rsa
                   chmod 600 ~/.ssh/id_rsa
-                  ssh-keyscan -H "$EC2_HOST" > ~/.ssh/known_hosts
-                  echo "$EC2_SSH_KEY"
-                  echo $EC2_SSH_KEY
-                  echo "$EC2_HOST"
-                  echo ${{secrets.EC2_HOST}}
+                  ssh-keyscan -H "$EC2_HOST" >> ~/.ssh/known_hosts  # Appending to known_hosts
               env:
                   EC2_SSH_KEY: ${{secrets.EC2_SSH_KEY}}
                   EC2_HOST: ${{secrets.EC2_HOST}}
 
-            # - name: SSH into EC2
-            #   run: |
-            #       ssh -i ~/.ssh/id_rsa "$EC2_USER"@"EC2_HOST"
-            #       git clone ${{github.event.repository.clone_url}}
-            #       cd ./pipeline
-            #       npm run manage_pm2
-            #   env:
-            #       EC2_HOST: ${{secrets.EC2_HOST}}
-            #       EC2_USER: ${{secrets.EC2_USER}}
+            - name: SSH into EC2 and execute commands
+              run: |
+                  ssh -i ~/.ssh/id_rsa $EC2_USER@$EC2_HOST << EOF
+                  git clone ${{github.event.repository.clone_url}}
+                  cd ./pipeline
+                  npm run manage_pm2
+                  EOF
+              env:
+                  EC2_HOST: ${{secrets.EC2_HOST}}
+                  EC2_USER: ${{secrets.EC2_USER}}
