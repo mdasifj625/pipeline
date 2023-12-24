@@ -1,0 +1,47 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Push to EC2 workflow
+
+# Controls when the workflow will run
+on:
+    # Triggers the workflow on push or pull request events but only for the "main" branch
+    push:
+        branches: ['main']
+
+    # Allows you to run this workflow manually from the Actions tab
+    workflow_dispatch:
+
+# list of jobs to push the code to EC2
+jobs:
+    # This workflow contains a single job called "build"
+    setup_ssh:
+        # The type of runner that the job will run on
+        runs-on: ubuntu-latest
+
+        # Steps represent a sequence of tasks that will be executed as part of the job
+        steps:
+            # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+            - uses: actions/checkout@v3
+
+            # commands to setup ssh
+            - name: setup ssh to access ec2
+              run: |
+                  mkdir -p ~/.ssh/
+                  echo "$EC2_SSH_KEY" > ~/.ssh/id_rsa
+                  chmod 600 ~/.ssh/id_rsa
+                  ssh-keyscan -H "$EC2_HOST" > ~/.ssh/known_hosts
+                  echo "$EC2_SSH_KEY"
+                  echo $EC2_SSH_KEY
+              env:
+                  EC2_SSH_KEY: ${{secrets.EC2_SSH_KEY}}
+                  EC2_HOST: ${{secrets.EC2_SSH_HOST}}
+
+            # - name: SSH into EC2
+            #   run: |
+            #       ssh -i ~/.ssh/id_rsa "$EC2_USER"@"EC2_HOST"
+            #       git clone ${{github.event.repository.clone_url}}
+            #       cd ./pipeline
+            #       npm run manage_pm2
+            #   env:
+            #       EC2_HOST: ${{secrets.EC2_HOST}}
+            #       EC2_USER: ${{secrets.EC2_USER}}
