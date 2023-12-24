@@ -14,9 +14,11 @@ if ! command -v nginx &>/dev/null; then
     sudo apt install -y nginx
 fi
 
-# Create a new Nginx configuration file for the application
+# Delete old and create a new Nginx configuration file for the application
 CONFIG_FILE="/etc/nginx/sites-available/$APP_NAME.conf"
+sudo rm $CONFIG_FILE
 sudo touch $CONFIG_FILE
+sudo systemctl restart nginx
 
 # Configure Nginx to forward port 80 to port $APP_PORT
 # echo "server {
